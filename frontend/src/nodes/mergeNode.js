@@ -1,7 +1,7 @@
 // mergeNode.js - Merge Multiple Inputs Node
 
 import { useState } from 'react';
-import { BaseNode, NodeField, NodeSelect, NodeLabel } from '../components/BaseNode';
+import { BaseNode, NodeField, NodeSelect } from '../components/BaseNode';
 
 export const MergeNode = ({ id, data }) => {
   const [mergeType, setMergeType] = useState(data?.mergeType || 'concat');

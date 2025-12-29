@@ -5,7 +5,6 @@
 import { useState, useRef, useCallback } from 'react';
 import ReactFlow, { Controls, Background, MiniMap } from 'reactflow';
 import { useStore } from './store';
-import { shallow } from 'zustand/shallow';
 
 // Import all nodes
 import { InputNode } from './nodes/inputNode';
@@ -36,33 +35,22 @@ const nodeTypes = {
   note: NoteNode,
 };
 
-const selector = (state) => ({
-  nodes: state.nodes,
-  edges: state.edges,
-  getNodeID: state.getNodeID,
-  addNode: state.addNode,
-  onNodesChange: state.onNodesChange,
-  onEdgesChange: state.onEdgesChange,
-  onConnect: state.onConnect,
-});
-
 export const PipelineUI = () => {
     const reactFlowWrapper = useRef(null);
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
-    const {
-      nodes,
-      edges,
-      getNodeID,
-      addNode,
-      onNodesChange,
-      onEdgesChange,
-      onConnect
-    } = useStore(selector, shallow);
 
-    const getInitNodeData = (nodeID, type) => {
-      let nodeData = { id: nodeID, nodeType: `${type}` };
-      return nodeData;
-    }
+    // Use individual selectors to avoid infinite loop
+    const nodes = useStore((state) => state.nodes);
+    const edges = useStore((state) => state.edges);
+    const getNodeID = useStore((state) => state.getNodeID);
+    const addNode = useStore((state) => state.addNode);
+    const onNodesChange = useStore((state) => state.onNodesChange);
+    const onEdgesChange = useStore((state) => state.onEdgesChange);
+    const onConnect = useStore((state) => state.onConnect);
+
+    const getInitNodeData = useCallback((nodeID, type) => {
+      return { id: nodeID, nodeType: `${type}` };
+    }, []);
 
     const onDrop = useCallback(
         (event) => {
@@ -94,12 +82,27 @@ export const PipelineUI = () => {
             addNode(newNode);
           }
         },
-        [reactFlowInstance]
+        [reactFlowInstance, getNodeID, addNode, getInitNodeData]
     );
 
     const onDragOver = useCallback((event) => {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
+    }, []);
+
+    const nodeColor = useCallback((node) => {
+      const colors = {
+        customInput: '#10b981',
+        customOutput: '#3b82f6',
+        llm: '#a855f7',
+        text: '#f59e0b',
+        api: '#06b6d4',
+        filter: '#f97316',
+        merge: '#ec4899',
+        conditional: '#6366f1',
+        note: '#6b7280',
+      };
+      return colors[node.type] || '#64748b';
     }, []);
 
     return (
@@ -129,20 +132,7 @@ export const PipelineUI = () => {
                   className="!bg-dark-800 !border-dark-600 !rounded-lg !shadow-lg"
                 />
                 <MiniMap
-                  nodeColor={(node) => {
-                    const colors = {
-                      customInput: '#10b981',
-                      customOutput: '#3b82f6',
-                      llm: '#a855f7',
-                      text: '#f59e0b',
-                      api: '#06b6d4',
-                      filter: '#f97316',
-                      merge: '#ec4899',
-                      conditional: '#6366f1',
-                      note: '#6b7280',
-                    };
-                    return colors[node.type] || '#64748b';
-                  }}
+                  nodeColor={nodeColor}
                   maskColor="rgba(15, 23, 42, 0.8)"
                   className="!bg-dark-800 !border-dark-600 !rounded-lg"
                 />
