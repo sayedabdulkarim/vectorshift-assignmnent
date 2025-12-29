@@ -25,6 +25,31 @@ const Icons = {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
     </svg>
   ),
+  api: (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+    </svg>
+  ),
+  filter: (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+    </svg>
+  ),
+  merge: (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+    </svg>
+  ),
+  conditional: (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+  note: (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+    </svg>
+  ),
   default: (
     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -57,6 +82,36 @@ const themes = {
     border: 'border-amber-500/50',
     header: 'bg-amber-500',
     accent: 'text-amber-400',
+  },
+  api: {
+    bg: 'bg-cyan-500/10',
+    border: 'border-cyan-500/50',
+    header: 'bg-cyan-500',
+    accent: 'text-cyan-400',
+  },
+  filter: {
+    bg: 'bg-orange-500/10',
+    border: 'border-orange-500/50',
+    header: 'bg-orange-500',
+    accent: 'text-orange-400',
+  },
+  merge: {
+    bg: 'bg-pink-500/10',
+    border: 'border-pink-500/50',
+    header: 'bg-pink-500',
+    accent: 'text-pink-400',
+  },
+  conditional: {
+    bg: 'bg-indigo-500/10',
+    border: 'border-indigo-500/50',
+    header: 'bg-indigo-500',
+    accent: 'text-indigo-400',
+  },
+  note: {
+    bg: 'bg-gray-500/10',
+    border: 'border-gray-500/50',
+    header: 'bg-gray-500',
+    accent: 'text-gray-400',
   },
   default: {
     bg: 'bg-slate-500/10',
